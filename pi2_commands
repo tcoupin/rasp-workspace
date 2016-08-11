@@ -1,0 +1,2 @@
+docker run --restart=always -d -h pi2 --net=host --name telegraf -v data-telegraf:/data apicht/rpi-telegraf
+docker run --restart=always -d --name nginx -p 80:80 -p 443:443 -v nginx:/tmp/conf_override drakerin/rpi-alpine-nginx
