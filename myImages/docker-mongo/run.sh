@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ "$SLAVE" == "true" ]]
+then
+  MASTER="false"
+fi
 
 cat > /mongodb/mongodb.conf << EOF
 dbpath=/mongodb/data
