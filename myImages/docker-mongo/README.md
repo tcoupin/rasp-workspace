@@ -4,6 +4,8 @@ https://hub.docker.com/r/tcoupin/rpi-mongo/
 
 Une image simple pour monter simplement un cluster mongo sur RPi.
 
+Demo : https://asciinema.org/a/cgud6hut2yml8ysflk4wpwr5v
+
 ### Master
 ```
 docker run --name mongo-master -p 27017:27017 -v mongodb:/mongodb tcoupin/rpi-mongo
