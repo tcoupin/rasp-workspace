@@ -36,3 +36,9 @@ docker run --name mongo-master -p 27017:27017 -p 28017:28017 -v mongodb:/mongodb
 ```
 docker exec --it mongo-master mongo
 ```
+
+Pour reconstruire depuis le slave :
+```
+use admin
+db.runCommand({copydb:1,fromhost:"SLAVE_IP",fromdb:"DATABASE_NAME",todb:"DATABASE_NAME",slaveOk:true})
+```
