@@ -1,4 +1,4 @@
-## docker-mongo
+## docker-mongo avec mongo 2.4.10
 
 https://hub.docker.com/r/tcoupin/rpi-mongo/
 
@@ -30,4 +30,9 @@ docker run --name mongo-master -p 27017:27017 -p 28017:28017 -v mongodb:/mongodb
 #### Interface REST
 ```
 docker run --name mongo-master -p 27017:27017 -p 28017:28017 -v mongodb:/mongodb --env NOHTTPINTERFACE=false --env REST=true tcoupin/rpi-mongo
+```
+
+### Mongo command line
+```
+docker exec --it mongo-master mongo
 ```
