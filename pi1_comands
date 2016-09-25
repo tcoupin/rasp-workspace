@@ -1,5 +1,9 @@
 docker run --restart=always -d --name influxdb -p 8086:8086 -p 8083:8083 -v influxdb-jesaispasaquoicasert:/data -v data-influxdb:/root/.influxdb dilgerm/rpi-influxdb
+
 docker run --restart=always -d --name grafana -p 3000:3000 -v grafana-data:/grafana/data -v grafana-conf:/grafana/conf  dilgerm/rpi-grafana
 docker run --restart=always -d -h pi1 --net=host --name telegraf -v data-telegraf:/data apicht/rpi-telegraf
+
 docker run --restart=always -d --name mongo-slave -p 27017:27017 --env SLAVE=true --add-host master:192.168.90.92 -v mongodb:/mongodb -v mongodb-cgroup:/sys/fs/cgroup tcoupin/rpi-mongo
-docker run -d --restart always --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins:/var/jenkins_home --env JENKINS_OPTS="--prefix=/jenkins" dilgerm/rpi-jenkins
+
+docker run --restart always -d --name owncloud-db -p 3306:3306 -e MYSQL_USER=owncloud -e MYSQL_PASSWORD=mycloud -e MYSQL_DATABASE=owncloud -e MYSQL_ROOT_PASSWORD=foo -v owncloud-db-data:/var/lib/mysql hypriot/rpi-mysql
+
