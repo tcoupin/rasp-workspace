@@ -9,8 +9,7 @@ cat > /mongodb/mongodb.conf << EOF
 dbpath=/mongodb/data
 
 
-# Enable journaling, http://www.mongodb.org/display/DOCS/Journaling
-journal=true
+journal=false
 
 # Disable the HTTP interface (Defaults to localhost:28017).
 nohttpinterface = $NOHTTPINTERFACE
