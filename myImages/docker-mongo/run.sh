@@ -20,6 +20,11 @@ master = $MASTER
 slave = $SLAVE
 source = $SOURCE
 
+configsvr = $CONFIGSVR
+shardsvr = $SHARDSVR
+configdb = $CONFIGDB
+
+
 EOF
 
 
