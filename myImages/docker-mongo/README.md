@@ -27,7 +27,7 @@ docker run --name mongo-slave -p 27017:27017 --env SLAVE=true --add-host master:
 ## Sharding
 ### config server
 ```
-docker run --name mongo-config -p 27019:27019 --env CONFIGSVR=true -h configsvr tcoupin/rpi-mongo
+docker run --name mongo-config -p 27017:27017 --env CONFIGSVR=true -h configsvr tcoupin/rpi-mongo
 ```
 Mode multi config server, 3 fois la ligne ci dessous en changeant selon le host
 ```
