@@ -6,12 +6,15 @@ RUN apt-get update && apt-get install mongodb-server
 
 
 VOLUME /mongodb
-EXPOSE 27017 28017
+EXPOSE 27017 28017 27019
 ENV NOHTTPINTERFACE=true
 ENV REST=false
 ENV MASTER=true
 ENV SLAVE=false
 ENV SOURCE=master:27017
+ENV CONFIGSVR=false
+ENV SHARDSVR=false
+ENV CONFIGDB=configsrv:27019
 
 ADD run.sh /
 
