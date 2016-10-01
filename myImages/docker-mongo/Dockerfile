@@ -12,8 +12,8 @@ ENV REST=false
 ENV MASTER=true
 ENV SLAVE=false
 ENV SOURCE=master:27017
-ENV CONFIGSRV=false
-ENV SHARDSRV=false
+ENV CONFIGSVR=false
+ENV SHARDSVR=false
 ENV CONFIGDB=configsrv:27019
 
 ADD run.sh /
