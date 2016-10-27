@@ -4,3 +4,7 @@ docker run --restart=always -d --name mongo-master -p 27017:27017 -v mongodb:/mo
 docker run --name owncloud-data -e OWNCLOUD_DB_USER=owncloud -e OWNCLOUD_DB_PASSWORD=mycloud -v owncloud-data:/srv/http/owncloud/data -v owncloud-config:/var/www/owncloud/config schoeffm/rpi-owncloud-data
 docker run --restart=always -d --name owncloud -p 8081:80 -v owncloud-data:/srv/http/owncloud/data -v owncloud-config:/var/www/owncloud/config -v owncloud-cache:/var/cache/nginx --add-host mysql:192.168.90.91 -e OWNCLOUD_SERVERNAME=cloud.coupin.tk schoeffm/rpi-owncloud
 
+
+Mongo Repair:
+=============
+docker run -it --rm -v mongodb:/mongodb -v mongodb-cgroup:/sys/fs/cgroup tcoupin/rpi-mongo /usr/bin/mongod -f /mongodb/mongodb.conf --repair
