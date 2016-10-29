@@ -1,3 +1,1 @@
-cdVolume(){ docker run -it --rm -v $1:/$@ dduportal/rpi-busybox; }
-alias cleanVolume="docker volume ls -q | xargs docker volume rm"
-
+PATH=$PATH:$PWD/rasp-workspace/myConf/script

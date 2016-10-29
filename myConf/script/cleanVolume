@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Clean unused volume
+
+docker volume ls -q | xargs docker volume rm

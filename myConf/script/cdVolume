@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]
+then
+	cat << EOF
+Usage: $0 VOLUME_NAME [DOCKER_RUN_OPTS]
+Ex :
+ - cdVolume toto # Mount docker volume in a temporary container at /toto
+ - cdVolume toto -v $PWD:/host # Mount volume toto at /toto and host local directory at /host
+EOF
+	exit 0
+fi
+docker run -it --rm -v $1:/$@ dduportal/rpi-busybox
