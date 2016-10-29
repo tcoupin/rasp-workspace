@@ -34,7 +34,7 @@ step=$(( 100/$nb ))
 heure=$(date +%Y-%m-%d_%H-%M)
 
 {
-    for i in $list
+    (for i in $list
     do
         #if [ -d "${SAVE_MOUNT}/${SAVE_PATH}/$i" ]
         #then
@@ -47,5 +47,5 @@ heure=$(date +%Y-%m-%d_%H-%M)
     	docker run --rm -v $i:/$i -v "${SAVE_MOUNT}/${SAVE_PATH}/$i":/safe  dduportal/rpi-busybox tar -zcf /safe/${heure}.tar.gz /$i/
         status=$(( $status+$step ))
         echo $status
-    done
-2>/dev/null} | whiptail --gauge "Saving..." 6 60 0
+    done) 2>/dev/null
+} | whiptail --gauge "Saving..." 6 60 0
