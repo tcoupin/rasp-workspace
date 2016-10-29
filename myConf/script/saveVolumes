@@ -1,0 +1,51 @@
+#!/bin/bash
+
+SAVE_MOUNT="/mnt/box"
+MOUNT_CMD="curlftpfs -o allow_root admin:password@192.168.90.2"
+SAVE_PATH="Disque dur LaBox/SAVE_$HOSTNAME"
+
+ismouted=$(mount | grep $SAVE_MOUNT | wc -l)
+
+if [[ "$ismouted" == "0" ]]
+then
+	echo "Mouting $SAVE_MOUNT"
+	$MOUNT_CMD $SAVE_MOUNT
+fi
+
+list=$(whiptail --title "Save docker volume" --checklist "Volume to save" 20 60 15 $(docker volume ls | tail -n +2 | awk '{print substr($2,0,20)" ("$1")  OFF"}' | tr '\n' ' ') 3>&1 1>&2 2>&3)
+
+list=$(echo $list | tr -d '"')
+
+exitstatus=$?
+if [ $exitstatus != 0 ]; then
+	echo "Cancel"
+	exit 0
+fi
+
+if [[ "$list" == "" ]]
+then
+	nb=0
+else
+	nb=$(echo $list | tr ' ' '\n' | wc -l)
+fi
+
+status=0;
+step=$(( 100/$nb ))
+heure=$(date +%Y-%m-%d_%H-%M)
+
+{
+    for i in $list
+    do
+        #if [ -d "${SAVE_MOUNT}/${SAVE_PATH}/$i" ]
+        #then
+        #	rm -rf "${SAVE_MOUNT}/${SAVE_PATH}/$i" # "${SAVE_MOUNT}/${SAVE_PATH}/${i}_OLD"
+    	#fi
+    	if [ ! -d "${SAVE_MOUNT}/${SAVE_PATH}/$i" ]
+    	then
+    		mkdir -p "${SAVE_MOUNT}/${SAVE_PATH}/$i"
+    	fi
+    	docker run --rm -v $i:/$i -v "${SAVE_MOUNT}/${SAVE_PATH}/$i":/safe  dduportal/rpi-busybox tar -zcf /safe/${heure}.tar.gz /$i/
+        status=$(( $status+$step ))
+        echo $status
+    done
+2>/dev/null} | whiptail --gauge "Saving..." 6 60 0
