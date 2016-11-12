@@ -9,33 +9,52 @@
     ]
   },
   {
-    "title": "NOT FOR ARM - Nginx",
+    "title": "Nginx",
     "description": "High performance web server",
     "logo": "https://cloudinovasi.id/assets/img/logos/nginx.png",
-    "image": "nginx:latest",
+    "image": "drakerin/rpi-alpine-nginx:latest",
     "ports": [
       "80/tcp",
       "443/tcp"
+    ],
+    "volumes": [
+      "/tmp/conf_override"
     ]
   },
   {
-    "title": "NOT FOR ARM - Httpd",
-    "description": "Open-source HTTP server",
+    "title": "Httpd",
+    "description": "Open-source HTTP server. Home dir at /www",
     "logo": "https://cloudinovasi.id/assets/img/logos/httpd.png",
-    "image": "httpd:latest",
+    "image": "hypriot/rpi-busybox-httpd:latest",
     "ports": [
       "80/tcp"
     ]
   },
   {
-    "title": "NOT FOR ARM - MySQL",
+    "title": "MySQL",
     "description": "The most popular open-source database",
     "logo": "https://cloudinovasi.id/assets/img/logos/mysql.png",
-    "image": "mysql:latest",
+    "image": "hypriot/rpi-mysql:latest",
     "env": [
       {
         "name": "MYSQL_ROOT_PASSWORD",
         "label": "Root password"
+      },
+      {
+        "name": "MYSQL_DATABASE",
+        "label": "Opt. Name of the database"
+      },
+      {
+        "name": "MYSQL_USER",
+        "label": "Opt. Name of the new user"
+      },
+      {
+        "name": "MYSQL_PASSWORD",
+        "label": "Opt. Password of the new user"
+      },
+      {
+        "name": "MYSQL_ALLOW_EMPTY_PASSWORD",
+        "label": "Opt. 'yes' or 'no'"
       }
     ],
     "ports": [
