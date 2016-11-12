@@ -1,6 +1,6 @@
 [
   {
-    "title": "Registry",
+    "title": "NOT FOR ARM - Registry",
     "description": "Docker image registry",
     "logo": "https://cloudinovasi.id/assets/img/logos/registry.png",
     "image": "registry:latest",
@@ -9,7 +9,7 @@
     ]
   },
   {
-    "title": "Nginx",
+    "title": "NOT FOR ARM - Nginx",
     "description": "High performance web server",
     "logo": "https://cloudinovasi.id/assets/img/logos/nginx.png",
     "image": "nginx:latest",
@@ -19,7 +19,7 @@
     ]
   },
   {
-    "title": "Httpd",
+    "title": "NOT FOR ARM - Httpd",
     "description": "Open-source HTTP server",
     "logo": "https://cloudinovasi.id/assets/img/logos/httpd.png",
     "image": "httpd:latest",
@@ -28,7 +28,7 @@
     ]
   },
   {
-    "title": "MySQL",
+    "title": "NOT FOR ARM - MySQL",
     "description": "The most popular open-source database",
     "logo": "https://cloudinovasi.id/assets/img/logos/mysql.png",
     "image": "mysql:latest",
@@ -44,7 +44,7 @@
     "volumes": ["/var/lib/mysql"]
   },
   {
-    "title": "MariaDB",
+    "title": "NOT FOR ARM - MariaDB",
     "description": "Performance beyond MySQL",
     "logo": "https://cloudinovasi.id/assets/img/logos/mariadb.png",
     "image": "mariadb:latest",
@@ -60,7 +60,7 @@
     "volumes": ["/var/lib/mysql"]
   },
   {
-    "title": "PostgreSQL",
+    "title": "NOT FOR ARM - PostgreSQL",
     "description": "The most advanced open-source database",
     "logo": "https://cloudinovasi.id/assets/img/logos/postgres.png",
     "image": "postgres:latest",
@@ -76,7 +76,7 @@
     "volumes": ["/var/lib/postgresql/data"]
   },
   {
-    "title": "Mongo",
+    "title": "NOT FOR ARM - Mongo",
     "description": "Open-source document-oriented database",
     "logo": "https://cloudinovasi.id/assets/img/logos/mongo.png",
     "image": "mongo:latest",
@@ -86,7 +86,7 @@
     "volumes": ["/data/db"]
   },
   {
-    "title": "Elasticsearch",
+    "title": "NOT FOR ARM - Elasticsearch",
     "description": "Open-source search and analytics engine",
     "logo": "https://cloudinovasi.id/assets/img/logos/elasticsearch.png",
     "image": "elasticsearch:latest",
@@ -97,7 +97,7 @@
     "volumes": ["/usr/share/elasticsearch/data"]
   },
   {
-    "title": "Solr",
+    "title": "NOT FOR ARM - Solr",
     "description": "Open-source enterprise search platform",
     "logo": "https://cloudinovasi.id/assets/img/logos/solr.png",
     "image": "solr:latest",
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "title": "Redis",
+    "title": "NOT FOR ARM - Redis",
     "description": "Open-source in-memory data structure store",
     "logo": "https://cloudinovasi.id/assets/img/logos/redis.png",
     "image": "redis:latest",
@@ -116,7 +116,7 @@
     "volumes": ["/data"]
   },
   {
-    "title": "RabbitMQ",
+    "title": "NOT FOR ARM - RabbitMQ",
     "description": "Highly reliable enterprise messaging system",
     "logo": "https://cloudinovasi.id/assets/img/logos/rabbitmq.png",
     "image": "rabbitmq:latest",
@@ -127,7 +127,7 @@
     "volumes": ["/var/lib/rabbitmq"]
   },
   {
-    "title": "WordPress",
+    "title": "NOT FOR ARM - WordPress",
     "description": "A free and open-source CMS",
     "logo": "https://cloudinovasi.id/assets/img/logos/wordpress.png",
     "image": "wordpress:latest",
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "title": "Joomla",
+    "title": "NOT FOR ARM - Joomla",
     "description": "Another free and open-source CMS",
     "logo": "https://cloudinovasi.id/assets/img/logos/joomla.png",
     "image": "joomla:latest",
@@ -167,7 +167,7 @@
     ]
   },
   {
-    "title": "Drupal",
+    "title": "NOT FOR ARM - Drupal",
     "description": "Open-source content management framework",
     "logo": "https://cloudinovasi.id/assets/img/logos/drupal.png",
     "image": "drupal:latest",
@@ -176,7 +176,7 @@
     ]
   },
   {
-    "title": "Magento 2",
+    "title": "NOT FOR ARM - Magento 2",
     "description": "Open-source e-commerce platform",
     "logo": "https://cloudinovasi.id/assets/img/logos/magento.png",
     "image": "alankent/gsd:latest",
@@ -187,7 +187,7 @@
     ]
   },
   {
-    "title": "Wowza",
+    "title": "NOT FOR ARM - Wowza",
     "description": "Streaming media server",
     "logo": "https://cloudinovasi.id/assets/img/logos/wowza.png",
     "image": "sameersbn/wowza:4.1.2-8",
@@ -211,7 +211,7 @@
     "volumes": ["/var/lib/wowza"]
   },
   {
-    "title": "Jenkins",
+    "title": "NOT FOR ARM - Jenkins",
     "description": "Open-source continuous integration tool",
     "logo": "https://cloudinovasi.id/assets/img/logos/jenkins.png",
     "image": "jenkins:latest",
@@ -222,7 +222,7 @@
     "volumes": ["/var/jenkins_home"]
   },
   {
-    "title": "Redmine",
+    "title": "NOT FOR ARM - Redmine",
     "description": "Open-source project management tool",
     "logo": "https://cloudinovasi.id/assets/img/logos/redmine.png",
     "image": "redmine:latest",
