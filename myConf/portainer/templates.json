@@ -9,6 +9,16 @@
     ]
   },
   {
+    "title": "MiniDLNA",
+    "description": "A multimedia server",
+    "logo": "http://www.chakal.net/wp-content/uploads/2012/02/dlna-logo.jpg",
+    "image": "forumi0721/alpine-armv7h-minidlna",
+    "volumes":[
+      "/var/cache/minidlna",
+      "/data"
+    ]
+  },
+  {
     "title": "Nginx",
     "description": "High performance web server",
     "logo": "https://cloudinovasi.id/assets/img/logos/nginx.png",
