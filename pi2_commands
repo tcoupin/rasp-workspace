@@ -4,7 +4,7 @@ docker run --restart=always -d --name mongo-master -p 27017:27017 -v mongodb:/mo
 docker run --name owncloud-data -e OWNCLOUD_DB_USER=owncloud -e OWNCLOUD_DB_PASSWORD=mycloud -v owncloud-data:/srv/http/owncloud/data -v owncloud-config:/var/www/owncloud/config schoeffm/rpi-owncloud-data
 docker run --restart=always -d --name owncloud -p 8081:80 -v owncloud-data:/srv/http/owncloud/data -v owncloud-config:/var/www/owncloud/config -v owncloud-cache:/var/cache/nginx --add-host mysql:192.168.90.91 -e OWNCLOUD_SERVERNAME=cloud.coupin.tk -v owncloud-app:/var/www/owncloud/apps schoeffm/rpi-owncloud
 
-docker run -d --name ui --label portainer=hide -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer:arm -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/myConf/portainer/templates.json
+docker run -d --restart=always --name ui --label portainer=hide -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer:arm -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/myConf/portainer/templates.json
 
 Mongo Repair:
 =============
