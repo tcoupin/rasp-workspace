@@ -1,0 +1,23 @@
+version: "3.0"
+services:
+  lb:
+    image: hypriot/rpi-traefik:v1.1.2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik:/etc/traefik/acme
+    labels:
+      traefik.enable: "false"
+    command: --docker --docker.watch --web --acme --acme.email "thibault.coupin@gmail.com" --acme.storage "acme.json" --acme.entryPoint https
+  httpd:
+    image: hypriot/rpi-busybox-httpd
+    labels:
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:pi2.local"
+      traefik.backend: "httpd"
+    depends_on: 
+      - lb
+volumes:
+  traefik:
