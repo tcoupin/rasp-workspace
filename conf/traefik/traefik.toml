@@ -1,0 +1,24 @@
+debug= true
+defaultEntryPoints = ["http", "https"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+
+[acme]
+email = "thibault.coupin@gmail.com"
+storage = "/etc/traefik/acme.json"
+entryPoint = "https"
+
+[docker]
+watch = true
+domain= "pi2.coupin.tk"
+
+[web]
+address = ":8080"

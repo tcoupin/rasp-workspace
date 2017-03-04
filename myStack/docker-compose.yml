@@ -1,5 +1,7 @@
-version: "3.0"
+version: "2.0"
+
 services:
+
   lb:
     image: hypriot/rpi-traefik:v1.1.2
     ports:
@@ -7,17 +9,24 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - traefik:/etc/traefik/acme
+      - /home/pirate/rasp-workspace/conf/traefik:/etc/traefik
     labels:
-      traefik.enable: "false"
-    command: --docker --docker.watch --web --acme --acme.email "thibault.coupin@gmail.com" --acme.storage "acme.json" --acme.entryPoint https
+      traefik.port: "8080"
+      traefik.frontend.rule: "Host:traefik.pi2.coupin.tk"
+      traefik.backend: "traefik"
+    networks:
+      - middle
+
   httpd:
     image: hypriot/rpi-busybox-httpd
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:pi2.local"
+      traefik.frontend.rule: "Host:pi2.coupin.tk"
       traefik.backend: "httpd"
     depends_on: 
       - lb
-volumes:
-  traefik:
+    networks:
+      - middle
+
+networks:
+  middle:
