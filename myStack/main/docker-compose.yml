@@ -15,6 +15,7 @@ services:
       traefik.port: "8080"
       traefik.frontend.rule: "Host:pi2.local"
       traefik.backend: "traefik"
+      traefik.frontend.endPoints: "http_alt"
       portainer: "hide"
     networks:
       - middle
