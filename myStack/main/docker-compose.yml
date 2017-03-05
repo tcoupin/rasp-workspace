@@ -13,7 +13,7 @@ services:
       - /mnt/pi2/traefik/acme:/etc/traefik/acme
     labels:
       traefik.port: "8080"
-      traefik.frontend.rule: "Host:traefik.pi2.coupin.tk"
+      traefik.frontend.rule: "Host:pi2.local"
       traefik.backend: "traefik"
       portainer: "hide"
     networks:
