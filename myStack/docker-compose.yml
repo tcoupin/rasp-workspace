@@ -9,11 +9,13 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/pirate/rasp-workspace/conf/traefik:/etc/traefik
+      - /home/pirate/rasp-workspace/conf/traefik:/etc/traefik 
+      - /mnt/pi2/traefik/acme:/etc/traefik/acme
     labels:
       traefik.port: "8080"
       traefik.frontend.rule: "Host:traefik.pi2.coupin.tk"
       traefik.backend: "traefik"
+      portainer: "hide"
     networks:
       - middle
 
@@ -21,12 +23,26 @@ services:
     image: hypriot/rpi-busybox-httpd
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:pi2.coupin.tk"
+      traefik.frontend.rule: "Host:pi2.coupin.tk;Host:coupin.tk"
       traefik.backend: "httpd"
     depends_on: 
       - lb
     networks:
       - middle
 
+  portainer:
+    image: portainer/portainer:linux-arm-1.11.4
+    networks:
+      - middle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/pi2/portainer:/data
+    labels: 
+      traefik.port: "9000"
+      traefik.frontend.rule: "Host:pi2.coupin.tk;Path:/portainer"
+      traefik.backend: portainer
+      portainer: "hide"
+    command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
+    
 networks:
   middle:

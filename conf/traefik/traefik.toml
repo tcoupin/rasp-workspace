@@ -13,7 +13,7 @@ defaultEntryPoints = ["http", "https"]
 
 [acme]
 email = "thibault.coupin@gmail.com"
-storage = "/etc/traefik/acme.json"
+storage = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
 onDemand = true
 
