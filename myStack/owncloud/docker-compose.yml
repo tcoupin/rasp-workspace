@@ -32,6 +32,7 @@ services:
       traefik.port: "80"
       traefik.frontend.rule: "Host:owncloud.pi2.coupin.tk, cloud.coupin.tk"
       traefik.backend: "owncloud"
+      traefik.docker.network: "main_middle"
 networks:
   owncloud-data:
   main_middle:
