@@ -15,6 +15,7 @@ defaultEntryPoints = ["http", "https"]
 email = "thibault.coupin@gmail.com"
 storage = "/etc/traefik/acme.json"
 entryPoint = "https"
+onDemand = true
 
 [docker]
 watch = true
