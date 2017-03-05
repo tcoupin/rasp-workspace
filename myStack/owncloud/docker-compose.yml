@@ -12,6 +12,8 @@ services:
       - /mnt/pi2/owncloud/owncloud-db-data:/var/lib/mysql
     networks:
       - owncloud-data
+    labels:
+      traefik.enable: false
   owncloud:
     build: ../../myImages/rpi-owncloud
     environment:
@@ -26,7 +28,10 @@ services:
     networks:
       - main_middle
       - owncloud-data
-
+    labels:
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:owncloud.pi2.coupin.tk, cloud.coupin.tk"
+      traefik.backend: "owncloud"
 networks:
   owncloud-data:
   main_middle:
