@@ -9,8 +9,6 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-  [entryPoints.http_alt]
-  address = ":8080"
 
 
 [acme]
@@ -25,3 +23,5 @@ domain= "pi2.coupin.tk"
 
 [web]
 address = ":8080"
+  [web.auth.basic]
+    users = ["admin:vxps2c0E8bm9w"]
