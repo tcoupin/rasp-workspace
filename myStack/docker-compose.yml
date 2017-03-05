@@ -39,7 +39,7 @@ services:
       - /mnt/pi2/portainer:/data
     labels: 
       traefik.port: "9000"
-      traefik.frontend.rule: "Host:pi2.coupin.tk;PathPrefix:/portainer"
+      traefik.frontend.rule: "Host:portainer.pi2.coupin.tk"
       traefik.backend: portainer
       portainer: "hide"
     command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
