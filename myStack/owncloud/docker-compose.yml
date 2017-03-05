@@ -13,7 +13,7 @@ services:
     networks:
       - owncloud-data
     labels:
-      traefik.enable: false
+      traefik.enable: "false"
   owncloud:
     build: ../../myImages/rpi-owncloud
     environment:
