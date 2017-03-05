@@ -23,7 +23,7 @@ services:
     image: hypriot/rpi-busybox-httpd
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:pi2.coupin.tk;Host:coupin.tk"
+      traefik.frontend.rule: "Host:pi2.coupin.tk, coupin.tk"
       traefik.backend: "httpd"
     depends_on: 
       - lb
