@@ -1,0 +1,33 @@
+version: "2.0"
+
+services:
+  owncloud-db:
+    image: hypriot/rpi-mysql
+    environment:
+      MYSQL_USER: owncloud
+      MYSQL_PASSWORD: mycloud
+      MYSQL_DATABASE: owncloud
+      MYSQL_ROOT_PASSWORD: foo
+    volumes:
+      - /mnt/pi2/owncloud/owncloud-db-data:/var/lib/mysql
+    networks:
+      - owncloud-data
+  owncloud:
+    build: ../../myImages/rpi-owncloud
+    environment:
+      OWNCLOUD_SERVERNAME: cloud.coupin.tk
+    volumes:
+      - /mnt/pi2/owncloud/owncloud-data:/srv/http/owncloud/data 
+      - /mnt/pi2/owncloud/owncloud-config:/var/www/owncloud/config 
+      - /mnt/pi2/owncloud/owncloud-cache:/var/cache/nginx
+      - /mnt/pi2/owncloud/owncloud-app:/var/www/owncloud/apps
+    links:
+      - "owncloud-db:mysql"
+    networks:
+      - main_middle
+      - owncloud-data
+
+networks:
+  owncloud-data:
+  main_middle:
+    external: true

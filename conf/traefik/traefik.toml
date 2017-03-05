@@ -1,4 +1,4 @@
-debug= true
+#debug= true
 defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
