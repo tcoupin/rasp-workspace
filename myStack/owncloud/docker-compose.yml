@@ -14,6 +14,8 @@ services:
       - owncloud-data
     labels:
       traefik.enable: "false"
+    restart: always
+
   owncloud:
     build: ../../myImages/rpi-owncloud
     environment:
@@ -33,6 +35,8 @@ services:
       traefik.frontend.rule: "Host:owncloud.pi2.coupin.tk, cloud.coupin.tk"
       traefik.backend: "owncloud"
       traefik.docker.network: "main_middle"
+    restart: always
+    
 networks:
   owncloud-data:
   main_middle:

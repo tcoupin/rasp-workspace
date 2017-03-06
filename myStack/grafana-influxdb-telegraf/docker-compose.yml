@@ -16,6 +16,7 @@ services:
       traefik.enable: "false"
     networks:
       - influx-data
+    restart: always
 
   grafana:
     image: dilgerm/rpi-grafana:2.6.0
@@ -32,6 +33,7 @@ services:
       traefik.frontend.rule: "Host:stats.pi2.coupin.tk"
       traefik.backend: "grafana"
       traefik.docker.network: "main_middle"
+    restart: always
 
   telegraf:
     image: tcoupin/rpi-telegraf:1.2.1
@@ -43,6 +45,7 @@ services:
       traefik.enable: "false"
     depends_on:
       - influxdb
+    restart: always
 
 networks:
   influx-data:

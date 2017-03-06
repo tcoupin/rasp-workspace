@@ -18,6 +18,7 @@ services:
       portainer: "hide"
     networks:
       - middle
+    restart: always
 
   httpd:
     image: hypriot/rpi-busybox-httpd
@@ -29,6 +30,7 @@ services:
       - lb
     networks:
       - middle
+    restart: always
 
   portainer:
     image: portainer/portainer:linux-arm-1.11.4
@@ -43,6 +45,8 @@ services:
       traefik.backend: portainer
       portainer: "hide"
     command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
+    restart: always
+
   archiver:
     image: tcoupin/rpi-archiver
     volumes:
@@ -55,5 +59,7 @@ services:
     labels:
       traefik.enable: "false"
     network_mode: none
+    restart: always
+    
 networks:
   middle:
