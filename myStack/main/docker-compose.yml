@@ -43,6 +43,17 @@ services:
       traefik.backend: portainer
       portainer: "hide"
     command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
-    
+  archiver:
+    image: tcoupin/rpi-archiver
+    volumes:
+      - /mnt/pi2:/tosave
+      - /mnt/BACKpi2:/save
+    environment:
+      HOUR: "4"
+      MIN: "0"
+      DOW: "3"
+    labels:
+      traefik.enable: "false"
+    network_mode: none
 networks:
   middle:
