@@ -21,8 +21,8 @@ services:
   grafana:
     image: dilgerm/rpi-grafana:2.6.0
     volumes:
-      - /mnt/pi2/grafana/data:/grafan/data
-      - /mnt/pi2/grafana/config:/grafana/config
+      - /mnt/pi2/grafana/data:/grafana/data
+      - /mnt/pi2/grafana/config:/grafana/conf
     links:
       - influxdb
     networks:

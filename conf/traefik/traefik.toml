@@ -21,7 +21,19 @@ onDemand = true
 watch = true
 domain= "pi2.coupin.tk"
 
+[file]
+[backends]
+  [backends.backend-bbox]
+    [backends.backend-bbox.servers.server-bbox]
+    url = "http://gestionbbox.lan"
+[frontends]
+  [frontends.frontend-bbox]
+  backend = "backend-bbox"
+    [frontends.frontend-bbox.routes.test_1]
+    rule = "Host:bbox.pi2.coupin.tk"
+
 [web]
 address = ":8080"
   [web.auth.basic]
     users = ["admin:$apr1$eK5lRmZz$4uArbGwrANOy3h2CVEjAS1"]
+
