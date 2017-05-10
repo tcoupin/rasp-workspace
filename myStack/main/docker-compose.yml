@@ -3,7 +3,7 @@ version: "2.0"
 services:
 
   lb:
-    image: hypriot/rpi-traefik:v1.1.2
+    image: hypriot/rpi-traefik:v1.2.3
     ports:
       - "80:80"
       - "443:443"
@@ -33,7 +33,7 @@ services:
     restart: always
 
   portainer:
-    image: portainer/portainer:linux-arm-1.11.4
+    image: portainer/portainer:linux-arm-1.12.4
     networks:
       - middle
     volumes:
