@@ -3,7 +3,7 @@ version: "2.0"
 services:
 
   lb:
-    image: hypriot/rpi-traefik:v1.2.3
+    image: hypriot/rpi-traefik:v1.3.0
     ports:
       - "80:80"
       - "443:443"
