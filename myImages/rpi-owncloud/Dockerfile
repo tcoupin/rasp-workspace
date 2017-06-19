@@ -11,7 +11,7 @@ RUN apk update && \
 	mkdir -p /run/apache2
 
 
-#ADD apache2/ /etc/apache2/
+ADD apache2/ /etc/apache2/
 ADD entrypoint.sh /entrypoint.sh
 
 ADD https://download.owncloud.org/community/owncloud-10.0.2.zip .
@@ -19,13 +19,15 @@ ADD https://download.owncloud.org/community/owncloud-10.0.2.zip.sha256 .
 
 RUN (sha256sum -c owncloud-10.0.2.zip.sha256 < owncloud-10.0.2.zip) && \
 	unzip owncloud-10.0.2.zip && \
-	rm -rf /var/www && \
-	mv owncloud /var/www/ && \
-	chown -R apache:apache /var/www && \
+	rm -rf /var/www/localhost && \
+	mv owncloud /var/www/html && \
+	mkdir /var/www/html/data && \
+	chown -R apache:apache /var/www/html && \
 	chmod +x /entrypoint.sh
 
-VOLUME /var/www/data
-VOLUME /var/www/apps
+VOLUME /var/www/html/data
+VOLUME /var/www/html/apps
+VOLUME /var/www/html/config
 
 ENV OC_DBTYPE="sqlite" OC_DBNAME="owncloud" OC_DBUSER="owncloud" OC_DBPASS="owncloud" OC_DBHOST="database" OC_DBTABLEPREFIX="oc_"
 
