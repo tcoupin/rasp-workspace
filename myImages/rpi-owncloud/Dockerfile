@@ -3,6 +3,8 @@
 FROM easypi/alpine-arm:edge
 MAINTAINER Thibault Coupin <thibault@coupin.tk>
 
+ARG OC_VERSION
+
 EXPOSE 80
 
 RUN apk update && \
@@ -14,11 +16,12 @@ RUN apk update && \
 ADD apache2/ /etc/apache2/
 ADD entrypoint.sh /entrypoint.sh
 
-ADD https://download.owncloud.org/community/owncloud-10.0.2.zip .
-ADD https://download.owncloud.org/community/owncloud-10.0.2.zip.sha256 .
+ADD https://download.owncloud.org/community/owncloud-${OC_VERSION}.zip .
+ADD https://download.owncloud.org/community/owncloud-${OC_VERSION}.zip.sha256 .
 
-RUN (sha256sum -c owncloud-10.0.2.zip.sha256 < owncloud-10.0.2.zip) && \
-	unzip owncloud-10.0.2.zip && \
+RUN (sha256sum -c owncloud-${OV_VERSION}.zip.sha256 < owncloud-${OC_VERSION}.zip) && \
+	unzip owncloud-${OC_VERSION}.zip && \
+	rm owncloud-${OC_VERSION}.zip && \
 	rm -rf /var/www/localhost && \
 	mv owncloud /var/www/html && \
 	mkdir /var/www/html/data && \
