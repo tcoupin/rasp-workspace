@@ -19,7 +19,7 @@ ADD entrypoint.sh /entrypoint.sh
 ADD https://download.owncloud.org/community/owncloud-${OC_VERSION}.zip .
 ADD https://download.owncloud.org/community/owncloud-${OC_VERSION}.zip.sha256 .
 
-RUN (sha256sum -c owncloud-${OV_VERSION}.zip.sha256 < owncloud-${OC_VERSION}.zip) && \
+RUN (sha256sum -c owncloud-${OC_VERSION}.zip.sha256 < owncloud-${OC_VERSION}.zip) && \
 	unzip owncloud-${OC_VERSION}.zip && \
 	rm owncloud-${OC_VERSION}.zip && \
 	rm -rf /var/www/localhost && \

@@ -10,7 +10,7 @@ Sqlite and mysql are supported.
 - Extra apps: /var/www/html/apps
 - Configuration: /var/www/html/config
 
-**Port:** only 80. You can add https in apache configuration or by adding [traefik](https://traefik.io) reverse proxy who supports Let's Encrypt (see [here](../../myStack/owncloud/) and [here](../../conf/owncloud)).
+**Port:** only 80. You can add https in apache configuration or by adding [traefik](https://traefik.io) reverse proxy who supports Let's Encrypt (see [here](../../myStack/main/) and [here](../../conf/traefik)).
 
 **Environment variables:**:
 
