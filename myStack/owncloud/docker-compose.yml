@@ -1,7 +1,7 @@
 version: "2.0"
 
 services:
-  owncloud-db:
+  database:
     image: hypriot/rpi-mysql
     environment:
       MYSQL_USER: owncloud
@@ -17,16 +17,16 @@ services:
     restart: always
 
   owncloud:
-    build: ../../myImages/rpi-owncloud
+    image: tcoupin/rpi-owncloud:10.0.2
     environment:
-      OWNCLOUD_SERVERNAME: cloud.coupin.tk
+      OC_DBTYPE: mysql
+      OC_DBPASS: mycloud
     volumes:
-      - /mnt/pi2/owncloud/owncloud-data:/srv/http/owncloud/data 
-      - /mnt/pi2/owncloud/owncloud-config:/var/www/owncloud/config 
-      - /mnt/pi2/owncloud/owncloud-cache:/var/cache/nginx
-      - /mnt/pi2/owncloud/owncloud-app:/var/www/owncloud/apps
+      - /mnt/pi2/owncloud/owncloud-data:/var/www/html/data 
+      - /mnt/pi2/owncloud/owncloud-config:/var/www/html/config 
+      - /mnt/pi2/owncloud/owncloud-app:/var/www/html/apps
     links:
-      - "owncloud-db:mysql"
+      - "database"
     networks:
       - main_middle
       - owncloud-data
@@ -36,6 +36,16 @@ services:
       traefik.backend: "owncloud"
       traefik.docker.network: "main_middle"
     restart: always
+
+  owncloud-cron:
+    build: ../../myImages/rpi-owncloud-cron
+    networks:
+      - owncloud-data
+    labels:
+      traefik.enable: "false"
+    links:
+      - "owncloud:owncloud-cron"
+    tty: true
     
 networks:
   owncloud-data:
