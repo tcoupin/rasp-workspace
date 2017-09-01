@@ -32,7 +32,7 @@ services:
       - owncloud-data
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:owncloud.pi2.coupin.tk, cloud.coupin.tk"
+      traefik.frontend.rule: "Host:cloud.thibbo.duckdns.org"
       traefik.backend: "owncloud"
       traefik.docker.network: "main_middle"
     restart: always

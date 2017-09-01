@@ -19,7 +19,7 @@ onDemand = true
 
 [docker]
 watch = true
-domain= "pi2.coupin.tk"
+domain= "thibbo.duckdns.org"
 
 [file]
 [backends]
@@ -30,7 +30,7 @@ domain= "pi2.coupin.tk"
   [frontends.frontend-bbox]
   backend = "backend-bbox"
     [frontends.frontend-bbox.routes.test_1]
-    rule = "Host:bbox.pi2.coupin.tk"
+    rule = "Host:bbox.thibbo.duckdns.org"
 
 [web]
 address = ":8080"

@@ -13,8 +13,6 @@ services:
       - /mnt/pi2/acme:/etc/acme
     labels:
       traefik.port: "8080"
-      traefik.frontend.rule: "Host:traefik.pi2.coupin.tk"
-      traefik.backend: "traefik"
       portainer: "hide"
     networks:
       - middle
@@ -24,8 +22,7 @@ services:
     image: hypriot/rpi-busybox-httpd
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:pi2.coupin.tk, coupin.tk"
-      traefik.backend: "httpd"
+      traefik.frontend.rule: "Host:pi2.coupin.tk, coupin.tk, 62.35.101.52, thibbo.duckdns.org"
     depends_on: 
       - lb
     networks:
@@ -33,7 +30,7 @@ services:
     restart: always
 
   portainer:
-    image: portainer/portainer:linux-arm-1.12.4
+    image: portainer/portainer:linux-arm-1.13.2
     networks:
       - middle
     volumes:
@@ -41,25 +38,23 @@ services:
       - /mnt/pi2/portainer:/data
     labels: 
       traefik.port: "9000"
-      traefik.frontend.rule: "Host:portainer.pi2.coupin.tk"
-      traefik.backend: portainer
       portainer: "hide"
     command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
     restart: always
 
-  archiver:
-    image: tcoupin/rpi-archiver
-    volumes:
-      - /mnt/pi2:/tosave
-      - /mnt/BACKpi2:/save
-    environment:
-      HOUR: "4"
-      MIN: "0"
-      DOW: "3"
-    labels:
-      traefik.enable: "false"
-    network_mode: none
-    restart: always
+#  archiver:
+#    image: tcoupin/rpi-archiver
+#    volumes:
+#      - /mnt/pi2:/tosave
+#      - /mnt/BACKpi2:/save
+#    environment:
+#      HOUR: "4"
+#      MIN: "0"
+#      DOW: "3"
+#    labels:
+#      traefik.enable: "false"
+#    network_mode: none
+#    restart: always
     
 networks:
   middle:

@@ -5,7 +5,7 @@ services:
   influxdb:
     image: hypriot/rpi-influxdb:1.1.1
     volumes:
-      - /mnt/pi2/influxdb:/data
+      - influxdb:/data
     ports:
       - "8086:8086"
     environment:
@@ -21,8 +21,8 @@ services:
   grafana:
     image: dilgerm/rpi-grafana:2.6.0
     volumes:
-      - /mnt/pi2/grafana/data:/grafana/data
-      - /mnt/pi2/grafana/config:/grafana/conf
+      - grafana-data:/grafana/data
+      - grafana-config:/grafana/conf
     links:
       - influxdb
     networks:
@@ -30,8 +30,7 @@ services:
       - influx-data
     labels:
       traefik.port: "3000"
-      traefik.frontend.rule: "Host:stats.pi2.coupin.tk"
-      traefik.backend: "grafana"
+      traefik.frontend.rule: "Host:stats.thibbo.duckdns.org"
       traefik.docker.network: "main_middle"
     restart: always
 
@@ -51,3 +50,7 @@ networks:
   influx-data:
   main_middle:
     external: true
+volumes:
+  influxdb:
+  grafana-config:
+  grafana-data:
