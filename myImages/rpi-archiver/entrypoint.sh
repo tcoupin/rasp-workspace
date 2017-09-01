@@ -19,9 +19,9 @@ if [[ "$DAY" == "" ]];then DAY='*';fi
 if [[ "$MONTH" == "" ]];then MONTH='*';fi
 if [[ "$DOW" == "" ]];then DOW='*';fi
 
-echo "$MIN $HOUR $DAY $MONTH $DOW /bin/sh /save.sh" > /etc/crontabs/root
+echo "$MIN $HOUR $DAY $MONTH $DOW archiver-backup" > /etc/crontabs/root
 
-echo "`date` Init crond $MIN $HOUR $DAY $MONTH $DOW /bin/sh /save.sh" >> /var/log/archiver.log
+echo "`date` Init crond $MIN $HOUR $DAY $MONTH $DOW archiver-backup" >> /var/log/archiver.log
 
 crond -b
 

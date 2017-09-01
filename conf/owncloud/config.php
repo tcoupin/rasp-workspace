@@ -7,6 +7,7 @@ $CONFIG = array (
   array (
     0 => 'cloud.coupin.tk:443',
     1 => '192.168.90.92:8081',
+    2 => 'owncloud-cron:80',
   ),
   'datadirectory' => '/srv/http/owncloud/data',
   'overwrite.cli.url' => 'https://cloud.coupin.tk',
