@@ -1,0 +1,19 @@
+version: "2.0"
+
+services:
+  camera:
+    image: pschmitt/picamera
+    devices:
+      - /dev/vchiq
+    networks:
+      - main_middle
+    labels:
+      traefik.port: "8000"
+      traefik.frontend.rule: "Host:thibbo.duckdns.org;PathPrefixStrip:/camera"
+      traefik.backend: "camera"
+      traefik.docker.network: "main_middle"
+    restart: always
+
+networks:
+  main_middle:
+    external: true
