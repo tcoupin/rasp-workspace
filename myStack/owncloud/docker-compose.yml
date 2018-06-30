@@ -2,14 +2,11 @@ version: "2.0"
 
 services:
   database:
-    image: hypriot/rpi-mysql
+    image: arm32v7/postgres
     environment:
-      MYSQL_USER: owncloud
-      MYSQL_PASSWORD: mycloud
-      MYSQL_DATABASE: owncloud
-      MYSQL_ROOT_PASSWORD: foo
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - /mnt/pi2/owncloud/owncloud-db-data:/var/lib/mysql
+      - /mnt/pi3/nextcloud/database:/var/lib/postgresql/data
     networks:
       - owncloud-data
     labels:
@@ -17,14 +14,17 @@ services:
     restart: always
 
   owncloud:
-    image: tcoupin/rpi-owncloud:10.0.2
+    build: .
     environment:
-      OC_DBTYPE: mysql
-      OC_DBPASS: mycloud
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: database
     volumes:
-      - /mnt/pi2/owncloud/owncloud-data:/var/www/html/data 
-      - /mnt/pi2/owncloud/owncloud-config:/var/www/html/config 
-      - /mnt/pi2/owncloud/owncloud-app:/var/www/html/apps
+      - /mnt/pi3/nextcloud/data:/var/www/html/data 
+      - /mnt/pi3/nextcloud/config:/var/www/html/config 
+      - /mnt/pi3/nextcloud/apps:/var/www/html/apps
+      - /mnt/pi3/nextcloud/theme:/var/www/html/themes
     links:
       - "database"
     networks:
@@ -37,15 +37,15 @@ services:
       traefik.docker.network: "main_middle"
     restart: always
 
-  owncloud-cron:
-    build: ../../myImages/rpi-owncloud-cron
-    networks:
-      - owncloud-data
-    labels:
-      traefik.enable: "false"
-    links:
-      - "owncloud:owncloud-cron"
-    tty: true
+#  owncloud-cron:
+#    build: ../../myImages/rpi-owncloud-cron
+#    networks:
+#      - owncloud-data
+#    labels:
+#      traefik.enable: "false"
+#    links:
+#      - "owncloud:owncloud-cron"
+#    tty: true
     
 networks:
   owncloud-data:
