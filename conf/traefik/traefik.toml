@@ -15,22 +15,33 @@ defaultEntryPoints = ["http", "https"]
 email = "thibault.coupin@gmail.com"
 storage = "/etc/acme/acme.json"
 entryPoint = "https"
-onDemand = true
+onHostRule = true
+acmeLogging = true
+[acme.httpChallenge]
+  entryPoint = "http"
 
 [docker]
 watch = true
 domain= "thibbo.duckdns.org"
 
+
 [file]
 [backends]
   [backends.backend-bbox]
     [backends.backend-bbox.servers.server-bbox]
-    url = "http://gestionbbox.lan"
+    url = "http://livebox.home"
+  [backends.backend-arduino]
+    [backends.backend-arduino.servers.server-arduino]
+    url = "http://192.168.90.123"
 [frontends]
   [frontends.frontend-bbox]
   backend = "backend-bbox"
     [frontends.frontend-bbox.routes.test_1]
-    rule = "Host:bbox.thibbo.duckdns.org"
+    rule = "Host:box.thibbo.duckdns.org"
+  [frontends.frontend-arduino]
+  backend = "backend-arduino"
+    [frontends.frontend-arduino.routes.hostrule]
+    rule = "Host:thibbo.duckdns.org;PathPrefixStrip:/arduino"
 
 [web]
 address = ":8080"

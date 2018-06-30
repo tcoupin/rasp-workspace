@@ -3,14 +3,14 @@ version: "2.0"
 services:
 
   lb:
-    image: hypriot/rpi-traefik:v1.3.0
+    image: arm32v6/traefik:tetedemoine-alpine
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/pirate/rasp-workspace/conf/traefik:/etc/traefik 
-      - /mnt/pi2/acme:/etc/acme
+      - /home/pi/rasp-workspace/conf/traefik:/etc/traefik 
+      - /mnt/pi3/acme:/etc/acme
     labels:
       traefik.port: "8080"
       portainer: "hide"
@@ -19,28 +19,30 @@ services:
     restart: always
 
   httpd:
-    image: hypriot/rpi-busybox-httpd
+    image: arm32v7/httpd
     labels:
       traefik.port: "80"
-      traefik.frontend.rule: "Host:pi2.coupin.tk, coupin.tk, 62.35.101.52, thibbo.duckdns.org"
+      traefik.frontend.rule: "Host:thibbo.duckdns.org"
     depends_on: 
       - lb
     networks:
       - middle
     restart: always
-
-  portainer:
-    image: portainer/portainer:linux-arm-1.13.2
-    networks:
-      - middle
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /mnt/pi2/portainer:/data
-    labels: 
-      traefik.port: "9000"
-      portainer: "hide"
-    command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
-    restart: always
+      - /mnt/pi3/nextcloud/data/tcoupin/files/www:/usr/local/apache2/htdocs/:ro
+
+#  portainer:
+#    image: portainer/portainer:linux-arm-1.13.2
+#    networks:
+#      - middle
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /mnt/pi3/portainer:/data
+#    labels: 
+#      traefik.port: "9000"
+#      portainer: "hide"
+#    command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
+#    restart: always
 
 #  archiver:
 #    image: tcoupin/rpi-archiver
