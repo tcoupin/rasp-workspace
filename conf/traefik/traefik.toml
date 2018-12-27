@@ -23,26 +23,11 @@ acmeLogging = true
 [docker]
 watch = true
 domain= "thibbo.duckdns.org"
-
+exposedbydefault = false
 
 [file]
-[backends]
-  [backends.backend-bbox]
-    [backends.backend-bbox.servers.server-bbox]
-    url = "http://livebox.home"
-  [backends.backend-arduino]
-    [backends.backend-arduino.servers.server-arduino]
-    url = "http://192.168.90.123"
-[frontends]
-  [frontends.frontend-bbox]
-  backend = "backend-bbox"
-    [frontends.frontend-bbox.routes.test_1]
-    rule = "Host:box.thibbo.duckdns.org"
-  [frontends.frontend-arduino]
-  backend = "backend-arduino"
-    [frontends.frontend-arduino.routes.hostrule]
-    rule = "Host:thibbo.duckdns.org;PathPrefixStrip:/arduino"
-
+  watch = true
+  filename = "/etc/traefik/rules.toml"
 [web]
 address = ":8080"
   [web.auth.basic]

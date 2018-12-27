@@ -14,8 +14,9 @@ services:
     labels:
       traefik.port: "80"
       traefik.frontend.rule: "Host:cloud.thibbo.duckdns.org"
-      traefik.backend: "owncloud"
+#      traefik.backend: "owncloud"
       traefik.docker.network: "main_middle"
+      traefik.enable: true
     restart: always
 
 #  owncloud-cron:

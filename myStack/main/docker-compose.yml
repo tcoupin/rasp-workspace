@@ -3,7 +3,7 @@ version: "2.0"
 services:
 
   lb:
-    image: arm32v6/traefik:tetedemoine-alpine
+    image: arm32v6/traefik:maroilles-alpine
     ports:
       - "80:80"
       - "443:443"
@@ -13,6 +13,7 @@ services:
       - /mnt/pi3/acme:/etc/acme
     labels:
       traefik.port: "8080"
+      traefik.enable: true
       portainer: "hide"
     networks:
       - middle
@@ -21,8 +22,8 @@ services:
   httpd:
     image: arm32v7/httpd
     labels:
-      traefik.port: "80"
       traefik.frontend.rule: "Host:thibbo.duckdns.org"
+      traefik.enable: true
     depends_on: 
       - lb
     networks:
