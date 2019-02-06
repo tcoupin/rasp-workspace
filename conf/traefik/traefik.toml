@@ -9,7 +9,10 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-
+  [entryPoints.ui]
+  address = ":8080"
+  [entryPoints.ui.auth.basic]
+    users = ["admin:$apr1$eK5lRmZz$4uArbGwrANOy3h2CVEjAS1"]
 
 [acme]
 email = "thibault.coupin@gmail.com"
@@ -28,8 +31,11 @@ exposedbydefault = false
 [file]
   watch = true
   filename = "/etc/traefik/rules.toml"
-[web]
-address = ":8080"
-  [web.auth.basic]
-    users = ["admin:$apr1$eK5lRmZz$4uArbGwrANOy3h2CVEjAS1"]
+[api]
+entryPoint = "ui"
 
+[metrics]
+  [metrics.influxdb]
+    address = "influxdb:8086"
+    protocol = "http"
+    database = "stats"
