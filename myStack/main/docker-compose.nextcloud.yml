@@ -2,22 +2,24 @@ version: "2.0"
 
 services:
 
-  owncloud:
-    build: .
+  cloud:
+    build:
+      context: .
+      dockerfile: Dockerfile.nextcloud
     volumes:
       - /mnt/pi3/nextcloud/data:/var/www/html/data 
       - /mnt/pi3/nextcloud/config:/var/www/html/config 
       - /mnt/pi3/nextcloud/apps:/var/www/html/apps
       - /mnt/pi3/nextcloud/theme:/var/www/html/themes
     networks:
-      - main_middle
+      - middle
     labels:
       traefik.port: "80"
       traefik.frontend.rule: "Host:cloud.thibbo.duckdns.org"
-#      traefik.backend: "owncloud"
       traefik.docker.network: "main_middle"
       traefik.enable: true
     restart: always
+
 
 #  owncloud-cron:
 #    build: ../../myImages/rpi-owncloud-cron
@@ -28,7 +30,4 @@ services:
 #    links:
 #      - "owncloud:owncloud-cron"
 #    tty: true
-    
-networks:
-  main_middle:
-    external: true
+

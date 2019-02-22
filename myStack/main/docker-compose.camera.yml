@@ -6,10 +6,12 @@ services:
     devices:
       - /dev/vchiq
     networks:
-      - main_middle
+      - middle
     environment:
       PATH_PREFIX: "/camera"
       NO_AUTH: "true"
+      HFLIP: "true"
+      VFLIP: "true"
     labels:
       traefik.port: "8000"
       traefik.frontend.rule: "Host:thibbo.duckdns.org;PathPrefix:/camera"
@@ -17,6 +19,3 @@ services:
       traefik.frontend.auth.basic.users: "admin:$$apr1$$eK5lRmZz$$4uArbGwrANOy3h2CVEjAS1"
     restart: always
 
-networks:
-  main_middle:
-    external: true

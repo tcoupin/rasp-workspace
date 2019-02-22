@@ -71,6 +71,16 @@ services:
     depends_on:
       - influxdb
     restart: always
+  
+  camera:
+    extends:
+      file: docker-compose.camera.yml
+      service: camera
+
+  cloud:
+    extends:
+      file: docker-compose.nextcloud.yml
+      service: cloud
 
 
 #  portainer:
