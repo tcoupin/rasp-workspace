@@ -2,19 +2,17 @@ version: "2.0"
 
 services:
   camera:
-    image: tcoupin/picamera
+    image: droogmic/rpi-cam-web
     devices:
       - /dev/vchiq
+      - /dev/vcsm
+    volumes:
+      - /opt/vc:/opt/vc
     networks:
       - middle
-    environment:
-      PATH_PREFIX: "/camera"
-      NO_AUTH: "true"
-      HFLIP: "true"
-      VFLIP: "true"
     labels:
-      traefik.port: "8000"
-      traefik.frontend.rule: "Host:thibbo.duckdns.org;PathPrefix:/camera"
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:camera.thibbo.duckdns.org"
       traefik.enable: true
       traefik.frontend.auth.basic.users: "admin:$$apr1$$eK5lRmZz$$4uArbGwrANOy3h2CVEjAS1"
     restart: always

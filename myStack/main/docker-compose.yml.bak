@@ -1,0 +1,143 @@
+version: "2.0"
+
+services:
+
+  lb:
+    image: arm32v6/traefik:maroilles-alpine
+#    links:
+#      - influxdb
+#    ports:
+#      - "80:80"
+#      - "8443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/pi/rasp-workspace/conf/traefik:/etc/traefik 
+      - /mnt/pi3/acme:/etc/acme
+      - /mnt/pi3/logs:/logs
+    labels:
+      traefik.port: "8080"
+      traefik.enable: true
+      traefik.frontend.whiteList.sourceRange: "192.168.91.0/24,192.168.90.0/24,2a01:cb1d:88bf:ba00::/64"
+      traefik.frontend.whiteList.useXForwardedFor: true
+      portainer: "hide"
+#    networks:
+#      - host
+    network_mode: host
+    restart: always
+
+  whoami:
+    image: containous/whoami:latest-arm.v7
+    labels:
+      traefik.port: "80"
+      traefik.enable: true
+      traefik.frontend.rule: "Host:thibbo.duckdns.org;PathPrefixStrip:/whoami"
+    networks:
+      - middle
+
+
+  httpd:
+    image: arm32v7/httpd
+    labels:
+      traefik.frontend.rule: "Host:thibbo.duckdns.org"
+      traefik.enable: true
+    depends_on: 
+      - lb
+    networks:
+      - middle
+    restart: always
+    volumes:
+      - /mnt/pi3/nextcloud/data/tcoupin/files/www:/usr/local/apache2/htdocs/:ro
+
+#  influxdb:
+#    image: arm32v7/influxdb:1.7
+#    environment:
+#      INFLUXDB_DB: stats
+#      INFLUXDB_USER: user
+#      INFLUXDB_USER_PASSWORD: user123
+#    networks:
+#      - middle
+#    ports:
+#      - "8086:8086"
+#    restart: always
+#    volumes:
+#      - influxdb:/var/lib/influxdb
+
+#  grafana:
+#    image: fg2it/grafana-armhf:v5.1.4
+#    labels:
+#      traefik.enable: true
+#      traefik.port: "3000"
+#      traefik.frontend.rule: "Host: stats.thibbo.duckdns.org"
+#    links:
+#      - influxdb
+#    networks:
+#      - middle
+#    restart: always
+#    volumes: 
+#      - grafana:/var/lib/grafana
+
+ # telegraf:
+ #   image: arm32v7/telegraf:1.9
+ #   volumes:
+ #     - /home/pi/rasp-workspace/conf/telegraf:/etc/telegraf
+ #     - /var/run/utmp:/var/run/utmp
+ #   network_mode: host
+ #   depends_on:
+ #     - influxdb
+ #   restart: always
+  
+  camera:
+    extends:
+      file: docker-compose.camera.yml
+      service: camera
+
+  cloud:
+    extends:
+      file: docker-compose.nextcloud.yml
+      service: cloud
+    links:
+      - cloud-db
+      - cloud-cache
+
+  cloud-db:
+    extends:
+      file: docker-compose.nextcloud.yml
+      service: db
+  cloud-cache:
+    extends:
+      file: docker-compose.nextcloud.yml
+      service: redis
+
+
+#  portainer:
+#    image: portainer/portainer:linux-arm-1.13.2
+#    networks:
+#      - middle
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /mnt/pi3/portainer:/data
+#    labels: 
+#      traefik.port: "9000"
+#      portainer: "hide"
+#    command: -l portainer=hide --templates https://raw.githubusercontent.com/tcoupin/rasp-workspace/master/conf/portainer/templates.json
+#    restart: always
+
+#  archiver:
+#    image: tcoupin/rpi-archiver
+#    volumes:
+#      - /mnt/pi2:/tosave
+#      - /mnt/BACKpi2:/save
+#    environment:
+#      HOUR: "4"
+#      MIN: "0"
+#      DOW: "3"
+#    labels:
+#      traefik.enable: "false"
+#    network_mode: none
+#    restart: always
+#volumes:
+#  influxdb:
+#  grafana:
+networks:
+  middle:
+  nextcloud:
